@@ -1,1 +1,815 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alessandro Pegoraro</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/AP_3.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/hello.webp" alt="Alessandro Pegoraro" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Alessandro Pegoraro">Alessandro<br>Pegoraro</h1>
+
+          <p class="title">Doctoral Researcher</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:alessandro.pegoraro.97@gmail.com" class="contact-link">alessandro.pegoraro.97@gmail.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+393477400642" class="contact-link">+39 347 7400642</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1997-06-10">June 10, 1997</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Darmstadt, Hessen Germany</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <div class="icon-social">
+          <ul class="social-list">
+
+            <li class="social-item">
+              <a href="https://www.linkedin.com/in/alessandro-pegoraro-26a695194/" target="_blank" rel="noopener noreferrer" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+            <li class="social-item">
+              <a href="https://scholar.google.com/citations?user=TjitzkAAAAAJ" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="assets\images\google-scholar_black.svg" alt="Google Scholar" class="social-icon">
+              </a>
+            </li>
+
+            <li class="social-item">
+              <a href="https://www.researchgate.net/profile/Alessandro-Pegoraro" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="assets/images/researchgate.ico" alt="ResearchGate" class="social-icon">
+              </a>
+            </li>
+
+            <li class="social-item">
+              <a href="https://www.informatik.tu-darmstadt.de/systemsecurity/system_security_lab_sys/index.en.jsp" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img src="assets/images/trust_icon.png" alt="System Security Lab" class="social-icon">
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Publications</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            I am a Doctoral Researcher specializing in Machine Learning and security, currently pursuing a PhD at the Technical University of Darmstadt, Germany. 
+            My research focuses on collaborative Learning techniques, including Federated and Split Learning, and extends to detecting AI-generated content such as Text and Audio Deepfakes.
+          </p>
+      
+          <p>
+            In my work, I employ mathematical approaches to find sound and general solutions to solve complex challenges in the field of Deep Learning and Collaborative Learning. 
+            I not only apply well-established mathematical techniques but also introduce original methods that I rigorously prove to be sound and generalizable. 
+          </p>
+
+          <p>
+            I am also passionate about researching threats to Distributed Learning, with a particular focus on poisoning attacks and their defenses. 
+            My work in this area has resulted in the development of novel techniques for detecting and mitigating both targeted and untargeted attacks on Collaborative Machine Learning.
+          </p>
+          
+          <p>
+            My research has been published in top-tier conferences, including NDSS and Usenix Security. 
+            I am dedicated to advancing the challenging intersection between Machine Learning and Security. 
+            While Machine Learning thrives on leveraging vast amounts of data to achieve its potential, 
+            Security often imposes constraints to safeguard sensitive information. 
+            My work focuses on harmonizing these seemingly opposing objectives, 
+            striving to achieve innovative solutions that balance the need for data utility with the imperative of protecting privacy and security.
+          </p>
+        
+
+      </section>
+      
+      
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">My Current Research Topics</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/sharing_yellow.svg" alt="Split Learning icon" width="50">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Split Learning</h4>
+
+                <p class="service-item-text">
+                  Collaborative Learning for Edge Devices, with a focus on privacy.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/graphic_designing_yellow.svg" alt="DeepFake icon" width="50" height="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">DeepFake and GenAI</h4>
+
+                <p class="service-item-text">
+                  Detection of AI-generated content, with a focus on ensuring authenticity.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/watermark.svg" alt="Watermarking icon" width="50">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">DNN Watermarking</h4>
+
+                <p class="service-item-text">
+                  Protecting the intellectual property of Deep Neural Networks through robust watermarking techniques.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/LLM.png" alt="LLMs icon" width="50">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Large Language Model</h4>
+
+                <p class="service-item-text">
+                  Exploring the capabilities, limitations, and security implications of Large Language Models in real-world applications.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title"><b>Doctoral Researcher AI/ML</b></h4>
+
+              <span><b>Technical University of Darmstadt, DE</b> July 2022 — Present</span>
+
+              <p class="timeline-text">
+                Research in Deep Learning for Security, with a focus on privacy-preserving Collaborative Learning and adversarial attacks.<br>  
+                Experience with Federated Learning, Split Learning, and Large Language Models.  
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Process Mining Stage</h4>
+
+              <span><b>Esteco - University of Padua, IT</b> Aug 2021 — Mar 2022</span>
+
+              <p class="timeline-text">
+                Development of a novel ML approach for Business process simulation (BPS), to automate the discovery of processes from event logs.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Quality Assurance Stage</h4>
+
+              <span><b>Thron S.p.A. - University of Padua, IT</b> May 2019 — Sept 2019</span>
+
+              <p class="timeline-text">
+                Research and testing of frameworks for automating user interactions with web APIs and websites.<br>
+                Development of a comprehensive regression testing suite integrated into the company's CI/CD pipeline.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title"><b>MSc in Computer Science</b></h4>
+
+              <span><b>University of Padua, IT</b> Dec 2019 - Apr 2022</span>
+
+              <p class="timeline-text">
+                <b>Majors:</b> Machine Learning, Computer Vision, Natural Language Processing, Deep Learning, Process Mining.<br>
+                <b>Thesis:</b> Discovery of Resource Working Calendars from Process Event Log.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title"><b>BSc in Computer Science</b></h4>
+              
+              <span><b>University of Padua, IT</b> Oct 2016 - Sept 2019</span>
+
+              <p class="timeline-text">
+                <b>Thesis:</b> Automatic Simulation of User Interaction with the Browser.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>        
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">My Skills</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Security</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Computer Vision</h5>
+                <data value="70">70%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 70%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Machine Learning</h5>
+                <data value="90">90%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Natural Language Processing</h5>
+                <data value="50">50%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 50%;"></div>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PUBLICATIONS
+      -->
+
+      <article class="publications" data-page="publications">
+
+        <header>
+          <h2 class="h2 article-title">Publications</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>NDSS</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>USENIX</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>IEEE S&P</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>arXiv</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>NDSS</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>USENIX</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>IEEE S&P</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>arXiv</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="ndss">
+              <a href="https://www.ndss-symposium.org/ndss-paper/voiceradar-voice-deepfake-detection-using-micro-frequency-and-compositional-analysis/"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">VoiceRadar: Voice Deepfake Detection using MicroFrequency and Compositional Analysis</h4>
+                  <p class="project-category">
+                    K Kumari, M Abbasihafshejani, <u><b>A Pegoraro</b></u>, P Rieger, K Arshi, M Jadliwala, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    Network and Distributed System Security (NDSS) Symposium, 2025, <u><b>Distinguished Paper Award</b></u>.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="ndss">
+              <a href="https://www.ndss-symposium.org/ndss-paper/safesplit-a-novel-defense-against-client-side-backdoor-attacks-in-split-learning/"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">SafeSplit: A Novel Defense Against Client-Side Backdoor Attacks in Split Learning</h4>
+                  <p class="project-category">
+                    P Rieger, <u><b>A Pegoraro</b></u>, K Kumari, T Abera, J Knauer, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    Network and Distributed System Security (NDSS) Symposium, 2025, <u><b>Distinguished Paper Award</b></u>.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="usenix">
+              <a href="https://www.usenix.org/conference/usenixsecurity24/presentation/pegoraro"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">DeepEclipse: How to Break White-Box DNN-Watermarking Schemes</h4>
+                  <p class="project-category">
+                    <u><b>A Pegoraro</b></u>, C Segna, K Kumari, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    33rd USENIX Security Symposium (USENIX Security), 2024.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="usenix">
+              <a href="https://www.usenix.org/conference/usenixsecurity24/presentation/kumari"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">Xplain: Analyzing Invisible Correlations in Model Explanation</h4>
+                  <p class="project-category">
+                    K Kumari, <u><b>A Pegoraro</b></u>, H Fereidooni, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    33rd USENIX Security Symposium (USENIX Security), 2024.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="ieee s&p">
+              <a href="https://ieeexplore.ieee.org/abstract/document/10795458"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">LayerDBA: Circumventing Similarity-Based Defenses in Federated Learning</h4>
+                  <p class="project-category">
+                    J Nikolov, <u><b>A Pegoraro</b></u>, P Rieger, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    2024 IEEE Security and Privacy Workshops (IEEE S&P), 2024.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="ndss">
+              <a href="https://www.ndss-symposium.org/ndss-paper/demasq-unmasking-the-chatgpt-wordsmith/"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">Demasq: Unmasking the chatgpt wordsmith</h4>
+                  <p class="project-category">
+                    K Kumari, <u><b>A Pegoraro</b></u>, H Fereidooni, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    Network and Distributed System Security (NDSS) Symposium, 2024.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="ndss">
+              <a href="https://www.ndss-symposium.org/ndss-paper/demasq-unmasking-the-chatgpt-wordsmith/"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">Freqfed: A frequency analysis-based approach for mitigating poisoning attacks in federated learning</h4>
+                  <p class="project-category">
+                    H Fereidooni, <u><b>A Pegoraro</b></u>, P Rieger, A Dmitrienko, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    Network and Distributed System Security (NDSS) Symposium, 2024.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="arxiv">
+              <a href="https://arxiv.org/abs/2304.01487"  target="_blank" rel="noopener noreferrer" >
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                   <ion-icon name="bookmarks-outline"></ion-icon>
+                  </div>
+
+                  <h4 class="project-title">To ChatGPT, or not to ChatGPT: That is the question!</h4>
+                  <p class="project-category">
+                    <u><b>A Pegoraro</b></u>, K Kumari, H Fereidooni, AR Sadeghi
+                  </p>
+                  <p class="project-category">
+                    arXiv preprint arXiv:2304.01487, 2023.
+                  </p>
+                </figure>
+
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="mapbox" data-mapbox>
+          <figure>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82280.83446690049!2d8.572422018527632!3d49.87484183372054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd70641173cdd9%3A0x422435029b0c5f0!2sDarmstadt!5e0!3m2!1sde!2sde!4v1743193588999!5m2!1sde!2sde" 
+              width="400" height="300" loading="lazy"></iframe>
+          </figure>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+        
+          <form class="form" data-form>
+        
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="subject" class="form-input" placeholder="Subject: Inquiry" data-form-input>
+            </div>
+        
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+        
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+        
+          </form>
+        
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
