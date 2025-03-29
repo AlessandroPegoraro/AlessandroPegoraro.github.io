@@ -1,0 +1,13 @@
+<svg width="1.5em" height="1.5em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="url(#paint1_linear)" stroke-width="2" 
+stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+<defs>
+<linearGradient id="paint0_linear" x1="2.12767" y1="1" x2="30.7018" y2="17.5237" gradientUnits="userSpaceOnUse">
+<stop offset="0.259336" stop-color="#FFDB6E"/>
+<stop offset="1" stop-color="#FFBC5E"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="1.59976" y1="8.08974e-07" x2="31.8368" y2="17.6727" gradientUnits="userSpaceOnUse">
+<stop offset="0.22" stop-color="#FFDB6E"/>
+<stop offset="1" stop-color="#FFBC5E"/>
+</linearGradient>
+</defs>
+</svg>
