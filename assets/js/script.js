@@ -95,7 +95,32 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
+// loop animations
+document.addEventListener("DOMContentLoaded", () => {
+  const avatarBox = document.querySelector(".avatar-box img");
+  const images = [
+    "./assets/images/hello.webp", // First image
+    "./assets/images/hello2.webp", // Second image
+  ];
 
+  let currentIndex = 0;
+
+  // Function to change the image
+  const changeImage = () => {
+    currentIndex++;
+    if (currentIndex < images.length) {
+      avatarBox.src = images[currentIndex];
+    } else {
+      clearInterval(imageInterval); // Stop the interval after the last image
+    }
+  };
+
+  // Change the image every 20 seconds
+  const imageInterval = setInterval(changeImage, 7000);
+});
+
+
+// send email functionality
 document.addEventListener("DOMContentLoaded", () => {
   const contactPage = document.querySelector("[data-page='contact']");
   const form = contactPage.querySelector(".form");
