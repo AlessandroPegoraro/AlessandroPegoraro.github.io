@@ -32,14 +32,16 @@ function updateTimer() {
   document.getElementById('timer').textContent = formatTime(elapsed);
 }
 
-// Update grid size
+// Update grid sizeRF
 function updateGridSize() {
   gridSize = gridSizes[currentGridSizeIndex];
   
   const gridElement = document.getElementById('grid');
   
-  gridElement.style.gridTemplateColumns = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
-  gridElement.style.gridTemplateRows = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
+  //gridElement.style.gridTemplateColumns = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
+  //gridElement.style.gridTemplateRows = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
+  gridElement.style.gridTemplateColumns = `repeat(${gridSize+1}, minmax(0, 1fr))`;
+  gridElement.style.gridTemplateRows = `repeat(${gridSize+1}, minmax(0, 1fr))`;
   
   document.querySelector(`input[name="grid-size"][value="${currentGridSizeIndex}"]`).checked = true;
 }
@@ -465,7 +467,7 @@ function renderGrid() {
         const topLeft = findTopLeftCell(pocket);
         if (topLeft && topLeft[0] === i && topLeft[1] === j) {
           const currentSum = pocket.reduce((sum, [pi, pj]) => sum + (selected[pi][pj] ? grid[pi][pj] : 0), 0);
-          cellContent = `${grid[i][j]}<div class="pocket-sum ${isPocketCorrect(p) ? 'correct' : 'incorrect'}">(${pocketSums[p]} / ${currentSum})</div>`;
+          cellContent = `${grid[i][j]}<div class="pocket-sum-${currentGridSizeIndex+4} ${isPocketCorrect(p) ? 'correct' : 'incorrect'}">(${pocketSums[p]} / ${currentSum})</div>`;
         }
       });
 

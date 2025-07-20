@@ -1644,16 +1644,34 @@ textarea.form-input::-webkit-resizer { display: none; }
     transform: translateX(-50%);
     font-size: min(3vw, 14px);
   }
-  .pocket-sum {
+  .pocket-sum-4 {
     position: absolute;
     top: 3px;
     left: 4px;
-    font-size: min(4vw, 18px);
+    font-size: min(3.2vw, 14px);
   }
-  .sum.correct, .pocket-sum.correct {
+  .pocket-sum-5 {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: min(3vw, 13px);
+  }
+  .pocket-sum-6 {
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    font-size: min(2.8vw, 12px);
+  }
+  .pocket-sum-7 {
+    position: absolute;
+    top: 1px;
+    left: 0.5px;
+    font-size: min(2.6vw, 11px);
+  }
+  .sum.correct, .pocket-sum-4.correct, .pocket-sum-5.correct, .pocket-sum-6.correct, .pocket-sum-7.correct {
     color: rgba(69, 255, 69, 0.884);
   }
-  .sum.incorrect, .pocket-sum.incorrect {
+  .sum.incorrect, .pocket-sum-4.incorrect, .pocket-sum-5.incorrect, .pocket-sum-6.incorrect, .pocket-sum-7.incorrect {
     color: rgba(209, 28, 28, 0.897);
   }
   #new-game {
@@ -1689,7 +1707,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     white-space: nowrap;
     scroll-snap-type: x mandatory;
     /*padding: 5px;*/
-    width: 100%;
+    /*width: 100%;*/
     max-width: 90vw;
     cursor: grab;
   }
@@ -1705,8 +1723,8 @@ textarea.form-input::-webkit-resizer { display: none; }
     background-color: #d3d3d3;
     color: #333;
     border-radius: 5px;
-    min-width: 90px;
-    min-height: 30px;
+    min-width: 50px;
+    min-height: 20px;
     text-align: center;
     cursor: pointer;
     scroll-snap-align: center;
@@ -1779,16 +1797,40 @@ textarea.form-input::-webkit-resizer { display: none; }
       left: 4px;
       font-size: min(4vw, 18px);
     }
-    .sum.correct, .pocket-sum.correct {
+    .pocket-sum-4 {
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      font-size: min(3.2vw, 14px);
+    }
+    .pocket-sum-5 {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: min(3vw, 13px);
+    }
+    .pocket-sum-6 {
+      position: absolute;
+      top: 2px;
+      left: 1px;
+      font-size: min(2.8vw, 12px);
+    }
+    .pocket-sum-7 {
+      position: absolute;
+      top: 1px;
+      left: 0.5px;
+      font-size: min(2.5vw, 11px);
+    }
+    .sum.correct, .pocket-sum-4.correct, .pocket-sum-5.correct, .pocket-sum-6.correct, .pocket-sum-7.correct {
       color: rgba(69, 255, 69, 0.884);
     }
-    .sum.incorrect, .pocket-sum.incorrect {
-    color: rgba(209, 28, 28, 0.897);
+    .sum.incorrect, .pocket-sum-4.incorrect, .pocket-sum-5.incorrect, .pocket-sum-6.incorrect, .pocket-sum-7.incorrect {
+      color: rgba(209, 28, 28, 0.897);
     }
     .radio-group label {
       font-size: min(4vw, 14px);
-      min-width: 80px;
-      min-height: 40px;
+      min-width: 50px;
+      min-height: 20px;
       background-color: #d3d3d3;
       color: #333;
     }
