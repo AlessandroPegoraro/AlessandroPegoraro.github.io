@@ -38,6 +38,12 @@ function updateGridSize() {
   
   const gridElement = document.getElementById('grid');
   
+  // Remove previous grid size classes
+  gridElement.classList.remove('grid-size-4', 'grid-size-5', 'grid-size-6', 'grid-size-7');
+
+  // Add the new grid size class
+  gridElement.classList.add(`grid-size-${gridSize}`);
+
   gridElement.style.gridTemplateColumns = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
   gridElement.style.gridTemplateRows = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
   

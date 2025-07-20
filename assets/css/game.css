@@ -29,6 +29,12 @@
     font-size: min(4vw, 27px);
     cursor: pointer;
     user-select: none;
+}
+
+.grid-size-4 .cell { font-size: min(4vw, 27px); }
+.grid-size-5 .cell { font-size: min(3.5vw, 24px); }
+.grid-size-6 .cell { font-size: min(3vw, 20px); }
+.grid-size-7 .cell { font-size: min(2.5vw, 18px); }
     -webkit-user-select: none;
     touch-action: manipulation;
   }
