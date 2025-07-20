@@ -1,0 +1,51 @@
+<article class="game" data-page="game">
+
+  <header>
+    <h2 class="h2 article-title">Game</h2>
+  </header>
+    <div class="icon-social">
+      <button id="new-game" onclick="generateNewPuzzle()">New Puzzle</button>
+      <!--
+      - Removed for logic
+      <button id="lock-correct-btn" onclick="toggleLockCorrect()">Lock Correct: On</button>
+      -->
+    </div>
+    <div id="timer-score">
+      <div id="timer">00:00</div>
+      <div id="score">Score: 0</div>
+    </div>
+    <div id="grid" class="grid-container"></div>
+    <div class="controls">
+      <div class="radio-group grid-size-group">
+        <input type="radio" name="grid-size" id="grid-4x4" value="0" checked onchange="changeGridSize()">
+        <label for="grid-4x4">4x4</label>
+        <input type="radio" name="grid-size" id="grid-5x5" value="1" onchange="changeGridSize()">
+        <label for="grid-5x5">5x5</label>
+        <input type="radio" name="grid-size" id="grid-6x6" value="2" onchange="changeGridSize()">
+        <label for="grid-6x6">6x6</label>
+        <input type="radio" name="grid-size" id="grid-7x7" value="3" onchange="changeGridSize()">
+        <label for="grid-7x7">7x7</label>
+      </div>
+      <div class="radio-group difficulty-group">
+        <input type="radio" name="difficulty" id="diff-easy" value="0" checked onchange="changeDifficulty()">
+        <label for="diff-easy">Easy</label>
+        <input type="radio" name="difficulty" id="diff-medium" value="1" onchange="changeDifficulty()">
+        <label for="diff-medium">Medium</label>
+        <input type="radio" name="difficulty" id="diff-hard" value="2" onchange="changeDifficulty()">
+        <label for="diff-hard">Hard</label>
+      </div>
+      <!--
+      - Removed for logic
+      <div class="radio-group start-state-group">
+        <input type="radio" name="start-state" id="start-selected" value="0" onchange="changeStartState()">
+        <label for="start-selected">All Selected</label>
+        <input type="radio" name="start-state" id="start-unselected" value="1" checked onchange="changeStartState()">
+        <label for="start-unselected">All Unselected</label>
+      </div>
+      -->
+    </div>
+      <!--
+        - game js logic
+      -->
+      <script src="./assets/js/game.js"></script>
+</article>
