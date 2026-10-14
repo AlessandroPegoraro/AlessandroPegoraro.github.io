@@ -596,7 +596,7 @@ main {
 .service-item-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
-  font-weight: var(--fw-3);
+  font-weight: var(--fw-300);
   line-height: 1.6;
 }
 
@@ -1573,22 +1573,14 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .game {
 
-
   .grid-container {
-  display: grid;
-  width: 100%;
-  max-width: 90vmin;  /* Or any value you want */
-  aspect-ratio: 1 / 1;
-  gap: 0; /* Optional spacing between grid items */
+    display: grid;
+    width: 100%;
+    max-width: 90vmin;
+    aspect-ratio: 1 / 1;
+    gap: 0;
   }
-/*
-  .grid-container {
-      display: grid;
-      gap: 0; 
-      margin-top: 20px;
-      max-width: 90vw;
-    }
-*/
+
   .cell {
     border: 0.5px dashed #333;
     display: flex;
@@ -1602,13 +1594,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     touch-action: manipulation;
   }
   .cell.active {
-    /*background-color: linear-gradient(to bottom, var(--orange-yellow-crayola), var(--bg-orange-onyx));*/
-    /*background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);*/
-    /*background: radial-gradient(closest-side,#FFDB6E, #FFBC5E);*/
-    /*background: radial-gradient(circle at center, red 0, blue 33%, yellow 66%, green 100%)*/
-    /*background: radial-gradient(circle at center, #fffe9a 0, #f0ed41ef 30%, #f3a333 50%, white 75%, white 100%);*/
     background: white;
-    background-color: white;
     color: #666;
   }
   .cell.deleted {
@@ -1616,7 +1602,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     color: #666;
   }
   .cell.transparent {
-    /*background-color: transparent;*/
     background-color: #252525;
     color: transparent;
   }
@@ -1675,16 +1660,11 @@ textarea.form-input::-webkit-resizer { display: none; }
     color: rgba(209, 28, 28, 0.897);
   }
   #new-game {
-    /*margin: 5px;
-    padding: 10px 20px;*/
     font-size: min(4vw, 16px);
     cursor: pointer;
-    /*background-color: #4CAF50;*/
     color: #FFDB6E;
     border: none;
     border-radius: 5px;
-    /*min-width: 120px;
-    min-height: 44px;*/
   }
   #new-game:hover {
     color: #FFBC5E;
@@ -1706,8 +1686,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     overflow-x: auto;
     white-space: nowrap;
     scroll-snap-type: x mandatory;
-    /*padding: 5px;*/
-    /*width: 100%;*/
     max-width: 90vw;
     cursor: grab;
   }
@@ -1741,52 +1719,34 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   #timer-score {
     display: flex;
-    align-items: center;  
+    align-items: center;
     justify-content: center;
-    background: var(--border-gradient-onyx); /* Same as icon-box */
-    color: var(--orange-yellow-crayola); /* Same as icon-box */
-    border-radius: 8px; /* Adjust as needed for rounded corners */
-    padding: 10px 20px; /* Makes it rectangular */
-    width: auto; /* Allows it to expand horizontally */
-    height: auto; /* Allows it to adjust based on content */
-    box-shadow: var(--shadow-1); /* Optional: Add a shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    background: var(--border-gradient-onyx);
+    color: var(--orange-yellow-crayola);
+    border-radius: 8px;
+    padding: 10px 20px;
+    width: auto;
+    height: auto;
+    box-shadow: var(--shadow-1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* Optional: Add hover effect */
   #timer-score:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   }
 
   #timer-score > div {
-    margin: 0 10px; /* Space between timer and score */
+    margin: 0 10px;
     text-align: center;
   }
-  
-  #timer {
-    /*margin: 10px;
-    padding: 5px 10px;
-    font-size: min(4vw, 16px);
-    background-color: #d3d3d3;
-    border-radius: 5px;*/
-    text-align: center;
-  }
-  #score {
-    /*margin: 10px;
-    padding: 5px 10px;
-    font-size: min(4vw, 16px);
-    background-color: #d3d3d3;
-    border-radius: 5px;*/
+
+  #timer, #score {
     text-align: center;
   }
   @media (max-width: 600px) {
     .cell {
       font-size: min(5vw, 16px);
-    }
-    .cell.transparent {
-      background-color: #252525;
-      color: transparent;
     }
     .clue {
       font-size: min(6vw, 20px);
@@ -1797,55 +1757,10 @@ textarea.form-input::-webkit-resizer { display: none; }
       left: 4px;
       font-size: min(4vw, 18px);
     }
-    .pocket-sum-4 {
-      position: absolute;
-      top: 3px;
-      left: 4px;
-      font-size: min(3.2vw, 14px);
-    }
-    .pocket-sum-5 {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      font-size: min(3vw, 13px);
-    }
-    .pocket-sum-6 {
-      position: absolute;
-      top: 2px;
-      left: 1px;
-      font-size: min(2.8vw, 12px);
-    }
-    .pocket-sum-7 {
-      position: absolute;
-      top: 1px;
-      left: 0.5px;
-      font-size: min(2.5vw, 11px);
-    }
-    .sum.correct, .pocket-sum-4.correct, .pocket-sum-5.correct, .pocket-sum-6.correct, .pocket-sum-7.correct {
-      color: rgba(69, 255, 69, 0.884);
-    }
-    .sum.incorrect, .pocket-sum-4.incorrect, .pocket-sum-5.incorrect, .pocket-sum-6.incorrect, .pocket-sum-7.incorrect {
-      color: rgba(209, 28, 28, 0.897);
-    }
     .radio-group label {
       font-size: min(4vw, 14px);
-      min-width: 50px;
-      min-height: 20px;
-      background-color: #d3d3d3;
-      color: #333;
     }
-    .radio-group input[type="radio"]:checked + label {
-      background-color: rgb(64, 64, 65);
-      color: #FFDB6E;
-    }
-    .radio-group label:hover {
-      background-color: #585858;
-      color: #FFBC5E;
-    }
-    #timer {
-      font-size: min(4vw, 14px);
-    }
-    #score {
+    #timer, #score {
       font-size: min(4vw, 14px);
     }
   }

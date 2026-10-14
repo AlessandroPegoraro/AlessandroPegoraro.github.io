@@ -23,8 +23,8 @@ const filterBtn = document.querySelectorAll("[data-filter-btn]");
 select.addEventListener("click", function () { elementToggleFunc(this); });
 
 // add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
+selectItems.forEach((item) => {
+  item.addEventListener("click", function () {
 
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
@@ -32,33 +32,31 @@ for (let i = 0; i < selectItems.length; i++) {
     filterFunc(selectedValue);
 
   });
-}
+});
 
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
 
-  for (let i = 0; i < filterItems.length; i++) {
+  filterItems.forEach((item) => {
 
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
+    if (selectedValue === "all" || selectedValue === item.dataset.category) {
+      item.classList.add("active");
     } else {
-      filterItems[i].classList.remove("active");
+      item.classList.remove("active");
     }
 
-  }
+  });
 
 }
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 
-for (let i = 0; i < filterBtn.length; i++) {
+filterBtn.forEach((btn) => {
 
-  filterBtn[i].addEventListener("click", function () {
+  btn.addEventListener("click", function () {
 
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
@@ -70,7 +68,7 @@ for (let i = 0; i < filterBtn.length; i++) {
 
   });
 
-}
+});
 
 
 // page navigation variables
@@ -78,22 +76,23 @@ const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+navigationLinks.forEach((link) => {
+  link.addEventListener("click", function () {
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
+    const targetPage = this.innerHTML.toLowerCase();
+
+    pages.forEach((page) => {
+      page.classList.toggle("active", page.dataset.page === targetPage);
+    });
+
+    navigationLinks.forEach((navLink) => {
+      navLink.classList.toggle("active", navLink === this);
+    });
+
+    window.scrollTo(0, 0);
 
   });
-}
+});
 
 // loop animations
 document.addEventListener("DOMContentLoaded", () => {
@@ -129,56 +128,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageInput = form.querySelector("textarea[name='message']");
   const submitButton = form.querySelector(".form-btn");
 
-  // Function to check if the contact page is active
-  const isContactPageActive = () => contactPage.classList.contains("active");
-
   // Function to validate the form
   const checkFormValidity = () => {
     const isFullNameFilled = fullNameInput.value.trim() !== "";
     const isMessageFilled = messageInput.value.trim() !== "";
-
-    if (isFullNameFilled && isMessageFilled) {
-      submitButton.disabled = false;
-    } else {
-      submitButton.disabled = true;
-    }
+    submitButton.disabled = !(isFullNameFilled && isMessageFilled);
   };
 
-  // Add event listeners only when the contact page is active
-  const setupFormListeners = () => {
-    [fullNameInput, subjectInput, messageInput].forEach((input) => {
-      input.addEventListener("input", checkFormValidity);
-    });
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const fullName = fullNameInput.value.trim();
-      const subject = subjectInput.value.trim();
-      const message = messageInput.value.trim();
-
-      // Determine the subject
-      const finalSubject = subject === "" ? `Inquiry from [${fullName}]` : `${subject} [${fullName}]`;
-
-      // Send email using mailto
-      const mailtoLink = `mailto:alessandro.pegoraro.97@gmail.com?subject=${encodeURIComponent(
-        finalSubject
-      )}&body=${encodeURIComponent(message)}`;
-      window.location.href = mailtoLink;
-
-      // Reset the form
-      form.reset();
-      submitButton.disabled = true;
-    });
-  };
-
-  // Observe page changes and activate the script only for the contact page
-  const observer = new MutationObserver(() => {
-    if (isContactPageActive()) {
-      setupFormListeners();
-      observer.disconnect(); // Stop observing once the listeners are set
-    }
+  [fullNameInput, subjectInput, messageInput].forEach((input) => {
+    input.addEventListener("input", checkFormValidity);
   });
 
-  observer.observe(document.body, { attributes: true, subtree: true });
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const fullName = fullNameInput.value.trim();
+    const subject = subjectInput.value.trim();
+    const message = messageInput.value.trim();
+
+    // Determine the subject
+    const finalSubject = subject === "" ? `Inquiry from [${fullName}]` : `${subject} [${fullName}]`;
+
+    // Send email using mailto
+    const mailtoLink = `mailto:alessandro.pegoraro.97@gmail.com?subject=${encodeURIComponent(
+      finalSubject
+    )}&body=${encodeURIComponent(message)}`;
+    window.location.href = mailtoLink;
+
+    // Reset the form
+    form.reset();
+    submitButton.disabled = true;
+  });
 });

@@ -3,8 +3,6 @@ let currentGridSizeIndex = 0; // Start with 4x4
 let gridSize = gridSizes[currentGridSizeIndex];
 const difficulties = ['Easy', 'Medium', 'Hard'];
 let currentDifficultyIndex = 0; // Start with Easy
-const startStates = ['selected', 'unselected'];
-let currentStartStateIndex = 1; // Start with All Unselected
 let grid = [];
 let rowSums = [];
 let colSums = [];
@@ -13,7 +11,6 @@ let active = []
 let solutionSelected = []; // Store the correct solution
 let pockets = [];
 let pocketSums = [];
-//let isLockCorrectEnabled = false; // Lock correct feature enabled by default
 let score = 0; // Track number of solved puzzles
 let isPuzzleSolved = false; // Prevent multiple increments for same puzzle
 let timerInterval = null; // Store timer interval
@@ -32,17 +29,14 @@ function updateTimer() {
   document.getElementById('timer').textContent = formatTime(elapsed);
 }
 
-// Update grid sizeRF
+// Update grid size
 function updateGridSize() {
   gridSize = gridSizes[currentGridSizeIndex];
-  
+
   const gridElement = document.getElementById('grid');
-  
-  //gridElement.style.gridTemplateColumns = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
-  //gridElement.style.gridTemplateRows = `minmax(0, 0.5fr) repeat(${gridSize}, minmax(0, 1fr))`;
   gridElement.style.gridTemplateColumns = `repeat(${gridSize+1}, minmax(0, 1fr))`;
   gridElement.style.gridTemplateRows = `repeat(${gridSize+1}, minmax(0, 1fr))`;
-  
+
   document.querySelector(`input[name="grid-size"][value="${currentGridSizeIndex}"]`).checked = true;
 }
 
@@ -61,21 +55,18 @@ function changeDifficulty() {
   generateNewPuzzle();
 }
 
-// Change start state
-/*
-function changeStartState() {
-  currentStartStateIndex = parseInt(document.querySelector('input[name="start-state"]:checked').value);
-  document.querySelector(`input[name="start-state"][value="${currentStartStateIndex}"]`).checked = true;
-  generateNewPuzzle();
-}*/
+// Wire up control events
+function setupControls() {
+  document.getElementById('new-game').addEventListener('click', generateNewPuzzle);
 
-// Toggle lock correct feature
-/*
-function toggleLockCorrect() {
-  isLockCorrectEnabled = !isLockCorrectEnabled;
-  document.getElementById('lock-correct-btn').textContent = `Lock Correct: ${isLockCorrectEnabled ? 'On' : 'Off'}`;
-  renderGrid(); // Re-render grid to apply or remove disabled/transparent classes
-}*/
+  document.querySelectorAll('input[name="grid-size"]').forEach((input) => {
+    input.addEventListener('change', changeGridSize);
+  });
+
+  document.querySelectorAll('input[name="difficulty"]').forEach((input) => {
+    input.addEventListener('change', changeDifficulty);
+  });
+}
 
 // Handle swipe and drag gestures
 function setupGestures() {
@@ -136,11 +127,9 @@ function setupGestures() {
     const swipeDistance = endX - startX;
     const minSwipeDistance = 50; // Minimum distance for a swipe/drag
     const isGridGroup = group.classList.contains('grid-size-group');
-    const isDifficultyGroup = group.classList.contains('difficulty-group');
-    //const isStartStateGroup = group.classList.contains('start-state-group');
-    const options = isGridGroup ? gridSizes : isDifficultyGroup ? difficulties : startStates;
-    let currentIndex = isGridGroup ? currentGridSizeIndex : isDifficultyGroup ? currentDifficultyIndex : currentStartStateIndex;
-    const radioName = isGridGroup ? 'grid-size' : isDifficultyGroup ? 'difficulty' : 'start-state';
+    const options = isGridGroup ? gridSizes : difficulties;
+    let currentIndex = isGridGroup ? currentGridSizeIndex : currentDifficultyIndex;
+    const radioName = isGridGroup ? 'grid-size' : 'difficulty';
 
     if (Math.abs(swipeDistance) > minSwipeDistance) {
       if (swipeDistance < 0) { // Swipe/drag left (next)
@@ -152,10 +141,8 @@ function setupGestures() {
       if (isGridGroup) {
         currentGridSizeIndex = currentIndex;
         updateGridSize();
-      } else if (isDifficultyGroup) {
-        currentDifficultyIndex = currentIndex;
       } else {
-        currentStartStateIndex = currentIndex;
+        currentDifficultyIndex = currentIndex;
       }
       generateNewPuzzle();
     }
@@ -340,8 +327,8 @@ function generatePuzzle() {
   // Step 9: Store the correct solution
   solutionSelected = selected.map(row => [...row]);
 
-  // Step 10: Set initial selection based on start state
-  selected = Array(gridSize).fill().map(() => Array(gridSize).fill(startStates[currentStartStateIndex] === 'selected'));
+  // Step 10: Start with all cells unselected
+  selected = Array(gridSize).fill().map(() => Array(gridSize).fill(false));
 }
 
 // Find the top-leftmost cell in a pocket
@@ -393,11 +380,6 @@ function isPocketCorrect(p) {
   return pockets[p].every(([i, j]) => selected[i][j] === solutionSelected[i][j]);
 }
 
-// Check if cell is in any correct pocket
-function isCellInCorrectPocket(i, j) {
-  return pockets.some((pocket, p) => isPocketCorrect(p) && pocket.some(([pi, pj]) => pi === i && pj === j));
-}
-
 // Render grid
 function renderGrid() {
   const gridContainer = document.getElementById('grid');
@@ -406,17 +388,6 @@ function renderGrid() {
   gridContainer.appendChild(createCell('', 'clue'));
   for (let j = 0; j < gridSize; j++) {
     const currentSum = calculateColSum(j);
-    /*
-    if (colSums[j] - currentSum < 0) {
-      const sumCell = createCell(colSums[j], `clue incorrect`);
-      gridContainer.appendChild(sumCell);
-    } else {
-      const sumCell = createCell(colSums[j] - currentSum, `clue ${isColCorrect(j) ? 'correct' : ''}`);
-      gridContainer.appendChild(sumCell);
-    }*/
-    //sumCell.innerHTML += `<div class="sum ${isColCorrect(j) ? 'correct' : 'incorrect'}">(${currentSum})</div>`;
-    //gridContainer.appendChild(sumCell);
-    
     if (colSums[j] - currentSum < 0) {
       const sumCell = createCell(colSums[j], `clue incorrect`);
       gridContainer.appendChild(sumCell);
@@ -441,26 +412,11 @@ function renderGrid() {
       const rowSumCell = createCell(rowSums[i] - currentSum, `clue`);
       gridContainer.appendChild(rowSumCell);
     }
-    //const rowSumCell = createCell(rowSums[i], `clue ${isRowCorrect(i) ? 'correct' : ''}`);
-    //rowSumCell.innerHTML += `<div class="sum ${isRowCorrect(i) ? 'correct' : 'incorrect'}">(${currentSum})</div>`;
-    //gridContainer.appendChild(rowSumCell);
     for (let j = 0; j < gridSize; j++) {
       let cellContent = grid[i][j];
       let cellClass = selected[i][j] ? 'cell active' :
                       active[i][j] ? 'cell deleted' : 'cell transparent';
       let cellStyle = '';
-
-      // Apply disabled and transparent classes only if lock correct is enabled
-      /*
-      if (isLockCorrectEnabled) {
-        const isDisabled = isRowCorrect(i) || isColCorrect(j) || isCellInCorrectPocket(i, j);
-        if (isDisabled) {
-          cellClass += ' disabled';
-        }
-        if (!selected[i][j] && isDisabled) {
-          cellClass += ' transparent';
-        }
-      }*/
 
       // Check if this cell is the top-leftmost for any pocket
       pockets.forEach((pocket, p) => {
@@ -519,10 +475,6 @@ function createCell(content, className) {
 
 // Toggle cell selection
 function toggleCell(i, j) {
-  // Skip toggling if lock correct is enabled and cell is in a correct row, column, or pocket
-  //if (isLockCorrectEnabled && (isRowCorrect(i) || isColCorrect(j) || isCellInCorrectPocket(i, j))) {
-  //  return;
-  //}
   if (active[i][j] === false) {
     active[i][j] = true; // Reactivate cell if it was hidden
   }
@@ -555,8 +507,6 @@ function calculateColSum(j) {
 
 // Generate new puzzle and render
 function generateNewPuzzle() {
-  //isLockCorrectEnabled = false; // Reset to enabled on new puzzle
-  //document.getElementById('lock-correct-btn').textContent = 'Lock Correct: On';
   isPuzzleSolved = false; // Allow score increment for new puzzle
   startTime = Date.now(); // Reset timer start
   clearInterval(timerInterval); // Clear existing timer
@@ -567,10 +517,10 @@ function generateNewPuzzle() {
   // Update radio buttons to reflect current settings
   document.querySelector(`input[name="grid-size"][value="${currentGridSizeIndex}"]`).checked = true;
   document.querySelector(`input[name="difficulty"][value="${currentDifficultyIndex}"]`).checked = true;
-  //document.querySelector(`input[name="start-state"][value="${currentStartStateIndex}"]`).checked = true;
 }
 
 // Initial setup
 updateGridSize();
 generateNewPuzzle();
 setupGestures();
+setupControls();

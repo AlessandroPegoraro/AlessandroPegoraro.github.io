@@ -16,11 +16,11 @@
     "url": "https://alessandropegoraro.github.io",
     "jobTitle": "Doctoral Researcher, Security Researcher, Research Assistant",
     "description": "Doctoral Researcher, author of DeepEclipse, author of VoiceRadar, author of Freqfed, author of SafeSplit, based in Darmstadt",
-    "image": "https://yourdomain/path/to/photo.jpg",
+    "image": "https://alessandropegoraro.github.io/assets/images/hello.webp",
     "sameAs": [
       "https://github.com/alessandropegoraro",
-      "https://linkedin.com/in/…",
-      "https://scholar.google.com/…"
+      "https://www.linkedin.com/in/alessandro-pegoraro-26a695194/",
+      "https://scholar.google.com/citations?user=TjitzkAAAAAJ"
     ],
     "knowsAbout": ["DeepEclipse", "VoiceRadar", "Freqfed", "SafeSplit", "collaborative learning", "split learning", "federated learning", "deepfake detection", "white-box DNN watermarking", "security research"]
   }
@@ -74,7 +74,7 @@
         <button class="info_more-btn" data-sidebar-btn>
           <span>Show Contacts</span>
 
-          <img src="assets\images\chevron-down.svg" alt="chevron-down" class="chev">
+          <img src="assets/images/chevron-down.svg" alt="chevron-down" class="chev">
         </button>
 
       </div>
@@ -88,7 +88,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <img src="assets\images\icon_email_2.svg" alt="email icon" class="icon-contact">
+              <img src="assets/images/icon_email_2.svg" alt="email icon" class="icon-contact">
             </div>
 
             <div class="contact-info">
@@ -102,7 +102,7 @@
           <li class="contact-item">
 
             <div class="icon-box">
-              <img src="assets\images\icon_map.svg" alt="phone icon" class="icon-contact">
+              <img src="assets/images/icon_map.svg" alt="phone icon" class="icon-contact">
             </div>
 
             <div class="contact-info">
@@ -122,13 +122,13 @@
 
             <li class="social-item">
               <a href="https://www.linkedin.com/in/alessandro-pegoraro-26a695194/" target="_blank" rel="noopener noreferrer" class="social-link">
-                <img src="assets\images\LinkedIn_icon.svg" alt="LinkedIn" class="social-icon">
+                <img src="assets/images/LinkedIn_icon.svg" alt="LinkedIn" class="social-icon">
               </a>
             </li>
 
             <li class="social-item">
               <a href="https://scholar.google.com/citations?user=TjitzkAAAAAJ" target="_blank" rel="noopener noreferrer" class="social-link">
-                <img src="assets\images\google-scholar_black.svg" alt="Google Scholar" class="social-icon">
+                <img src="assets/images/google-scholar_black.svg" alt="Google Scholar" class="social-icon">
               </a>
             </li>
 
@@ -327,51 +327,39 @@
         <header>
           <h2 class="h2 article-title">Game</h2>
         </header>
-          <div class="icon-social">
-            <button id="new-game" onclick="generateNewPuzzle()">New Puzzle</button>
-            <!--
-            - Removed for logic
-            <button id="lock-correct-btn" onclick="toggleLockCorrect()">Lock Correct: On</button>
-            -->
+
+        <div class="icon-social">
+          <button id="new-game">New Puzzle</button>
+        </div>
+
+        <div id="timer-score">
+          <div id="timer">00:00</div>
+          <div id="score">Score: 0</div>
+        </div>
+
+        <div id="grid" class="grid-container"></div>
+
+        <div class="controls">
+          <div class="radio-group grid-size-group">
+            <input type="radio" name="grid-size" id="grid-4x4" value="0" checked>
+            <label for="grid-4x4">4x4</label>
+            <input type="radio" name="grid-size" id="grid-5x5" value="1">
+            <label for="grid-5x5">5x5</label>
+            <input type="radio" name="grid-size" id="grid-6x6" value="2">
+            <label for="grid-6x6">6x6</label>
+            <input type="radio" name="grid-size" id="grid-7x7" value="3">
+            <label for="grid-7x7">7x7</label>
           </div>
-          <div id="timer-score">
-            <div id="timer">00:00</div>
-            <div id="score">Score: 0</div>
+          <div class="radio-group difficulty-group">
+            <input type="radio" name="difficulty" id="diff-easy" value="0" checked>
+            <label for="diff-easy">Easy</label>
+            <input type="radio" name="difficulty" id="diff-medium" value="1">
+            <label for="diff-medium">Medium</label>
+            <input type="radio" name="difficulty" id="diff-hard" value="2">
+            <label for="diff-hard">Hard</label>
           </div>
-          <div id="grid" class="grid-container"></div>
-          <div class="controls">
-            <div class="radio-group grid-size-group">
-              <input type="radio" name="grid-size" id="grid-4x4" value="0" checked onchange="changeGridSize()">
-              <label for="grid-4x4">4x4</label>
-              <input type="radio" name="grid-size" id="grid-5x5" value="1" onchange="changeGridSize()">
-              <label for="grid-5x5">5x5</label>
-              <input type="radio" name="grid-size" id="grid-6x6" value="2" onchange="changeGridSize()">
-              <label for="grid-6x6">6x6</label>
-              <input type="radio" name="grid-size" id="grid-7x7" value="3" onchange="changeGridSize()">
-              <label for="grid-7x7">7x7</label>
-            </div>
-            <div class="radio-group difficulty-group">
-              <input type="radio" name="difficulty" id="diff-easy" value="0" checked onchange="changeDifficulty()">
-              <label for="diff-easy">Easy</label>
-              <input type="radio" name="difficulty" id="diff-medium" value="1" onchange="changeDifficulty()">
-              <label for="diff-medium">Medium</label>
-              <input type="radio" name="difficulty" id="diff-hard" value="2" onchange="changeDifficulty()">
-              <label for="diff-hard">Hard</label>
-            </div>
-            <!--
-            - Removed for logic
-            <div class="radio-group start-state-group">
-              <input type="radio" name="start-state" id="start-selected" value="0" onchange="changeStartState()">
-              <label for="start-selected">All Selected</label>
-              <input type="radio" name="start-state" id="start-unselected" value="1" checked onchange="changeStartState()">
-              <label for="start-unselected">All Unselected</label>
-            </div>
-            -->
-          </div>
-            <!--
-              - game js logic
-            -->
-            <script src="./assets/js/game_logic.js"></script>
+        </div>
+
       </article>
 
 
@@ -390,7 +378,7 @@
 
           <div class="title-wrapper">
             <div class="icon-box">
-              <img src="assets\images\suitcase-icon.svg" alt="experience icon" class="icon-contact">
+              <img src="assets/images/suitcase-icon.svg" alt="experience icon" class="icon-contact">
             </div>
 
             <h3 class="h3">Experience</h3>
@@ -444,7 +432,7 @@
 
           <div class="title-wrapper">
             <div class="icon-box">
-              <img src="assets\images\book-icon.svg" alt="education icon" class="icon-contact">
+              <img src="assets/images/book-icon.svg" alt="education icon" class="icon-contact">
             </div>
 
             <h3 class="h3">Education</h3>
@@ -588,7 +576,7 @@
               <div class="select-value" data-selecct-value>Select category</div>
 
               <div class="select-icon">
-                <img src="assets\images\chevron-down.svg" alt="chevron-down" class="chev">
+                <img src="assets/images/chevron-down.svg" alt="chevron-down" class="chev">
               </div>
 
             </button>
@@ -626,7 +614,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                    <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">VoiceRadar: Voice Deepfake Detection using MicroFrequency and Compositional Analysis</h4>
@@ -647,7 +635,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                    <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">SafeSplit: A Novel Defense Against Client-Side Backdoor Attacks in Split Learning</h4>
@@ -668,7 +656,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">DeepEclipse: How to Break White-Box DNN-Watermarking Schemes</h4>
@@ -689,7 +677,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">Xplain: Analyzing Invisible Correlations in Model Explanation</h4>
@@ -710,7 +698,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">LayerDBA: Circumventing Similarity-Based Defenses in Federated Learning</h4>
@@ -731,7 +719,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">Demasq: Unmasking the chatgpt wordsmith</h4>
@@ -748,11 +736,11 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="ndss">
-              <a href="https://www.ndss-symposium.org/ndss-paper/demasq-unmasking-the-chatgpt-wordsmith/"  target="_blank" rel="noopener noreferrer" >
+              <a href="https://www.ndss-symposium.org/ndss-paper/freqfed-a-frequency-analysis-based-approach-for-mitigating-poisoning-attacks-in-federated-learning/"  target="_blank" rel="noopener noreferrer" >
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">Freqfed: A frequency analysis-based approach for mitigating poisoning attacks in federated learning</h4>
@@ -773,7 +761,7 @@
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                   <img src="assets\images\open-link.svg" alt="open link" class="icon-contact">
+                   <img src="assets/images/open-link.svg" alt="open link" class="icon-contact">
                   </div>
 
                   <h4 class="project-title">To ChatGPT, or not to ChatGPT: That is the question!</h4>
@@ -827,7 +815,7 @@
             <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
         
             <button class="form-btn" type="submit" disabled data-form-btn>
-              <img src="assets\images\send-icon.svg" alt="send icon" class="icon-contact">
+              <img src="assets/images/send-icon.svg" alt="send icon" class="icon-contact">
               <span>Send Message</span>
             </button>
         
@@ -849,7 +837,8 @@
   <!--
     - custom js link
   -->
-  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/game_logic.js" defer></script>
+  <script src="./assets/js/script.js" defer></script>
 
 </body>
 
