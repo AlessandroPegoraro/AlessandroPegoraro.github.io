@@ -3,8 +3,8 @@
 // ---------------------------------------------------------------------------
 // Puzzle generation
 //
-// Strategy: generate a random valid solution first (one piece per row/column,
-// no two pieces in adjacent rows within one column of each other). Then build
+// Strategy: generate a random valid solution first (one plant per row/column,
+// no two plants in adjacent rows within one column of each other). Then build
 // regions that are unique *by construction* rather than by generate-and-test:
 // row 0 is entirely region 0; each later row's home cell starts a brand new
 // region, and every other cell in that row inherits the region of the cell
@@ -34,8 +34,8 @@ function shuffledRange(n) {
   return arr;
 }
 
-// One queen per row/column; consecutive rows' columns must differ by more
-// than 1 (the only way two one-per-row/column pieces can be grid-adjacent).
+// One plant per row/column; consecutive rows' columns must differ by more
+// than 1 (the only way two one-per-row/column plants can be grid-adjacent).
 function generateSolution(n) {
   const solution = [];
   const usedCols = new Set();
@@ -64,7 +64,7 @@ function generateSolution(n) {
 
 // Build the region partition that forces the given solution to be the only
 // valid placement. The anchor row is entirely its own region; for every
-// other row, the home cell (the solution's queen for that row) starts a new
+// other row, the home cell (the solution's plant for that row) starts a new
 // region, and every other cell inherits the region of the cell directly
 // between it and the anchor (above it, for rows below the anchor; below it,
 // for rows above the anchor — a mirror image of the same rule).
@@ -75,8 +75,8 @@ function generateSolution(n) {
 // must trace back (through the chain of "inherits from its anchor-ward
 // neighbor") to either (a) some already-resolved row's home column, which P
 // can't reuse without a column clash, since P already placed that row's
-// queen there, or (b) the anchor row's region, which P already used via the
-// anchor's own queen. Either way, P reusing that region at row r is a
+// plant there, or (b) the anchor row's region, which P already used via the
+// anchor's own plant. Either way, P reusing that region at row r is a
 // contradiction, so P must agree with `solution` at every non-anchor row.
 // With those n-1 rows pinned to their n-1 distinct columns, only one column
 // is left over for the anchor row — the one `solution` already uses there.
@@ -159,7 +159,7 @@ function reshapeRegions(n, regionOf, solution, sizes, attempts, minRegionSize) {
   for (let attempt = 0; attempt < attempts; attempt++) {
     const row = Math.floor(Math.random() * n);
     const col = Math.floor(Math.random() * n);
-    if (solution[row] === col) continue; // never move a home (queen) cell
+    if (solution[row] === col) continue; // never move a home (plant) cell
 
     const oldRegion = regionOf[row][col];
     if (sizes[oldRegion] - 1 < minRegionSize) continue; // don't starve the donor
@@ -233,7 +233,7 @@ function reshapeForShape(n, regionOf, solution, sizes, attempts, minRegionSize) 
     safeCells = [];
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
-        if (solution[i] === j) continue; // never move a home (queen) cell
+        if (solution[i] === j) continue; // never move a home (plant) cell
         if (sameRegionDegree(n, regionOf, i, j) <= 1) safeCells.push([i, j]);
       }
     }
@@ -604,8 +604,7 @@ function generatePuzzle(n, minRegionSize = 2) {
 }
 
 // ---------------------------------------------------------------------------
-// Game state (placeholder rendering — circle for queen, X for a marked cell,
-// green/red to debug correctness at a glance; real art comes in a later pass)
+// Game state
 // ---------------------------------------------------------------------------
 
 const gridSizes = [5, 6, 7, 8, 9, 10];
@@ -614,7 +613,7 @@ let gridSize = gridSizes[currentGridSizeIndex];
 
 const EMPTY = 0;
 const MARKED = 1;
-const QUEEN = 2;
+const PLANTED = 2;
 
 const REGION_COLORS = [
   '#f3a6a0', '#f7cf8e', '#ce7464', '#8a6042', '#b7e3a3',
@@ -687,11 +686,11 @@ function changeGridSize() {
 
 function isSolved() {
   for (let row = 0; row < gridSize; row++) {
-    if (cellState[row][solution[row]] !== QUEEN) return false;
+    if (cellState[row][solution[row]] !== PLANTED) return false;
   }
   for (let row = 0; row < gridSize; row++) {
     for (let col = 0; col < gridSize; col++) {
-      if (cellState[row][col] === QUEEN && col !== solution[row]) return false;
+      if (cellState[row][col] === PLANTED && col !== solution[row]) return false;
     }
   }
   return true;
@@ -841,10 +840,9 @@ function renderGrid() {
   updateAllCellVisuals();
 }
 
-// Split so the rim can be drawn *after* the foliage: the rim needs to sit on
-// top of the leaf/stem bases for the "planted in the pot" look, but the body
-// behind the trunk stays underneath. One combined POT_SVG used to draw both
-// before the foliage, which put the foliage on top of the rim instead.
+// Split so the rim can be drawn *after* the foliage, sitting on top of the
+// leaf/stem bases for the "planted in the pot" look, while the body behind
+// the trunk stays underneath it.
 const POT_BODY_SVG = `
   <path d="M15,38 L33,38 L31,46 L17,46 Z" fill="#b97a56" stroke="#1a1f14" stroke-width="0.6"/>
 `;
@@ -919,15 +917,11 @@ const PLANT_ICONS = [
   </svg>`,
   // green — saguaro cactus
   //
-  // The trunk and both arms are each built from two overlapping rounded
-  // rects, and a per-shape stroke can't hide the seam where they overlap —
-  // each rect still draws its own border straight through the middle of
-  // what should read as one continuous arm. Fixed with the standard
-  // icon-design trick instead: an enlarged dark copy of every rect drawn
-  // first with no stroke of its own, then the real green rects on top, also
-  // strokeless. Overlapping same-color fills merge seamlessly (no per-shape
-  // border to clash), so the dark layer reads as one unbroken outline peeking
-  // out from behind, and the green layer reads as one unbroken silhouette.
+  // Trunk/arms are overlapping rounded rects; a per-shape stroke would draw
+  // a seam through every overlap. Fix: an enlarged dark copy of each rect
+  // with no stroke, then the real green rects on top, also strokeless —
+  // overlapping same-color fills merge seamlessly, so each layer reads as
+  // one unbroken shape instead of several bordered ones.
   `<svg viewBox="0 0 48 48" class="plant-icon" aria-hidden="true">
     ${POT_BODY_SVG}
     <g class="plant-foliage">
@@ -1043,15 +1037,15 @@ function plantForRegion(region) {
 
 function updateCellVisual(row, col) {
   const cell = cellElements[row][col];
-  cell.classList.remove('q-marked', 'q-queen', 'q-correct', 'q-wrong');
+  cell.classList.remove('q-marked', 'q-planted', 'q-correct', 'q-wrong');
   cell.innerHTML = '';
 
   const state = cellState[row][col];
   if (state === MARKED) {
     cell.classList.add('q-marked');
     cell.textContent = '✕';
-  } else if (state === QUEEN) {
-    cell.classList.add('q-queen', col === solution[row] ? 'q-correct' : 'q-wrong');
+  } else if (state === PLANTED) {
+    cell.classList.add('q-planted', col === solution[row] ? 'q-correct' : 'q-wrong');
     cell.innerHTML = plantForRegion(regionOf[row][col]) + '<span class="placement-tag" aria-hidden="true"></span>';
   }
 }
@@ -1066,10 +1060,10 @@ function updateAllCellVisuals() {
   document.getElementById('grid').classList.toggle('puzzle-solved', isPuzzleSolved);
 }
 
-// When a correctly-placed piece is confirmed, no other cell in its row,
-// column, or region can ever hold a piece either — so with Auto-mark on,
+// When a correctly-planted cell is confirmed, no other cell in its row,
+// column, or region can ever hold a plant either — so with Auto-mark on,
 // every still-empty cell among those gets an X for free. Only EMPTY cells
-// are touched; anything already marked or holding a (right or wrong) piece
+// are touched; anything already marked or holding a (right or wrong) plant
 // is left exactly as the player left it.
 function autoMarkEliminated(row, col) {
   const region = regionOf[row][col];
@@ -1086,9 +1080,9 @@ function autoMarkEliminated(row, col) {
 }
 
 // Clears a cell straight to empty — the fast way to take back an X without
-// routing through "place a piece" (which, if wrong, costs a point). No
-// scoring effect either way, matching the existing tap cycle: removing a
-// piece by tapping back to empty doesn't refund or charge anything either.
+// routing through "plant one" (which, if wrong, costs a point). No scoring
+// effect either way, matching the existing tap cycle: removing a plant by
+// tapping back to empty doesn't refund or charge anything either.
 function clearCell(row, col) {
   if (isPuzzleSolved || cellState[row][col] === EMPTY) return;
   cellState[row][col] = EMPTY;
@@ -1097,8 +1091,8 @@ function clearCell(row, col) {
 
 // One-directional paints used by the drag gestures below: paintMark only
 // ever turns an EMPTY cell into an X, paintErase only ever turns an X back
-// to EMPTY. Neither ever touches a placed piece — dragging is only ever for
-// bulk X's, placing/removing a piece stays a deliberate single tap.
+// to EMPTY. Neither ever touches a planted cell — dragging is only ever for
+// bulk X's, planting/removing a plant stays a deliberate single tap.
 function paintMark(row, col) {
   if (isPuzzleSolved || cellState[row][col] !== EMPTY) return;
   cellState[row][col] = MARKED;
@@ -1111,14 +1105,14 @@ function paintErase(row, col) {
   updateCellVisual(row, col);
 }
 
-// Tap cycles a cell through empty -> marked -> queen -> empty.
+// Tap cycles a cell through empty -> marked -> planted -> empty.
 function toggleCell(row, col) {
   if (isPuzzleSolved) return;
 
   const nextState = (cellState[row][col] + 1) % 3;
   cellState[row][col] = nextState;
 
-  if (nextState === QUEEN) {
+  if (nextState === PLANTED) {
     const isCorrect = col === solution[row];
     if (isCorrect) {
       score++;
@@ -1146,7 +1140,7 @@ function toggleCell(row, col) {
 //
 // Desktop: left-click-drag paints a whole stroke of X's at once, regardless
 // of which cell the drag started on — only empty cells along the path turn
-// into X's, anything already marked (or holding a piece) is left exactly as
+// into X's, anything already marked (or holding a plant) is left exactly as
 // it was. Removing a mark in bulk isn't a drag gesture on desktop; the mouse
 // already has an unambiguous separate action for clearing a single cell
 // (right-click). A plain click with no movement is untouched, same 3-state
@@ -1168,7 +1162,7 @@ let mouseDragMoved = false;
 
 // Right-button drag mirrors the left-button one but erases instead of
 // marks, reusing paintErase as-is (same restraint: only touches already-
-// marked cells, never a placed piece).
+// marked cells, never a planted one).
 let mouseRightDragActive = false;
 let mouseRightDragStartRow = -1;
 let mouseRightDragStartCol = -1;

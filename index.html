@@ -208,28 +208,15 @@
 
         <section class="about-text">
           <p>
-            I am a Doctoral Researcher specializing in Machine Learning and security, currently pursuing a PhD at the Technical University of Darmstadt, Germany.<br> 
-            My research focuses on Collaborative Learning techniques, including Federated and Split Learning, and extends to detecting AI-generated content such as Text and Audio Deepfakes.
-          </p>
-      
-          <p>
-            In my work, I employ mathematical approaches to find sound and general solutions to solve complex challenges in the field of Deep Learning and Collaborative Learning. 
-            I not only apply well-established techniques but also am able to introduce original methods that I rigorously prove to be sound and generalizable. 
+            I am a Doctoral Researcher specializing in Machine Learning and security, currently pursuing a PhD at the Technical University of Darmstadt, Germany.<br>
+            My research focuses on Collaborative Learning techniques, including Federated and Split Learning, and extends to detecting AI-generated content such as Text and Audio Deepfakes. I am dedicated to advancing the intersection between Machine Learning and Security, balancing the need for data utility with the imperative of protecting privacy.
           </p>
 
           <p>
-            I am passionate about researching threats to Distributed Learning, with a particular focus on poisoning attacks and their defenses. 
-            My work in this area has resulted in the development of novel techniques for detecting and mitigating both targeted and untargeted attacks on Collaborative Machine Learning.
-            Leading to my research beeing published in top-tier conferences, including NDSS and USENIX Security. 
+            I am passionate about researching threats to Distributed Learning, with a particular focus on poisoning attacks and their defenses.
+            My work in this area has resulted in the development of novel techniques for detecting and mitigating both targeted and untargeted attacks on Collaborative Machine Learning,
+            leading to my research being published in top-tier conferences, including NDSS and USENIX Security.
           </p>
-          
-          <p>
-            I am dedicated to advancing the challenging intersection between Machine Learning and Security. 
-            While Machine Learning thrives on leveraging vast amounts of data to achieve its potential, 
-            Security often imposes constraints to safeguard sensitive information. My work focuses on harmonizing these seemingly opposing objectives, 
-            striving to achieve innovative solutions that balance the need for data utility with the imperative of protecting privacy and security.
-          </p>
-        
 
       </section>
       
@@ -325,8 +312,8 @@
       <article class="game" data-page="game">
 
         <!-- Shared plant-icon building blocks, defined once. Several cells can
-             hold the same species' piece at the same time, and duplicate
-             element ids would break every <use> referencing them. -->
+             hold the same species at the same time, and duplicate element ids
+             would break every <use> referencing them. -->
         <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
           <defs>
             <path id="plant-snake-blade" d="M0,0 C-1.5,-9 -2,-21 -0.8,-32 C-0.4,-34 0.4,-34 0.8,-32 C2,-21 1.5,-9 0,0 Z"/>
@@ -372,12 +359,11 @@
           <div id="score">Score: 0</div>
         </div>
 
-        <div id="status" class="game-status"></div>
-
         <div id="grid-stage">
           <div id="grid-inner">
             <div id="grid" class="grid-container"></div>
             <svg id="region-borders" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div id="status" class="game-status"></div>
             <div id="generating-overlay" hidden>
               <svg viewBox="0 -35 120 125" class="watering-illustration" aria-hidden="true">
                 <!-- Ink color here is light gray (#d6d6d6, same as the overlay's
@@ -404,15 +390,6 @@
                   <rect x="0" y="6" width="22" height="16" rx="6" fill="#8fa6c9" stroke="#d6d6d6" stroke-width="1.2"/>
                   <path d="M20,18 L34,26 L32,28 L19,21 Z" fill="#8fa6c9" stroke="#d6d6d6" stroke-width="1.2" stroke-linejoin="round"/>
                   <circle cx="33" cy="27" r="1.6" fill="#d6d6d6"/>
-                </g>
-
-                <!-- Static splash glyph (| /|\ ), not an animation — one vertical
-                     line and two outward diagonals fanning from the spout tip,
-                     the classic flat-icon way to draw a splash of water. -->
-                <g stroke="#9cc6e8" stroke-width="3" stroke-linecap="round">
-                  <line x1="60" y1="22" x2="54" y2="29"/>
-                  <line x1="60" y1="22" x2="60" y2="30"/>
-                  <line x1="60" y1="22" x2="66" y2="29"/>
                 </g>
               </svg>
               <span>Growing new plants…</span>

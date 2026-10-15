@@ -1568,7 +1568,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
 /*-----------------------------------*\
-  #GAME (Queens)
+  #GAME
 \*-----------------------------------*/
 
 .game {
@@ -1581,12 +1581,27 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-bottom: 15px;
   }
 
+  /* A light wash, not a solid block — the whole point of fixing the sway
+     animation was to actually see it, so "Solved!" sits on top of the board
+     without hiding what's swaying underneath. Empty (not yet solved) means
+     no background at all, so it never dims the board mid-game. */
   .game-status {
-    min-height: 1.5em;
-    margin-top: 12px;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    border-radius: 8px;
+    background: hsla(0, 0%, 0%, 0.25);
     color: var(--orange-yellow-crayola);
     font-weight: var(--fw-600);
+    font-size: var(--fs-1);
     text-align: center;
+  }
+
+  .game-status:empty {
+    background: none;
   }
 
   /* The mat: a lighter, slightly larger panel behind the grid so its edge
@@ -1698,20 +1713,10 @@ textarea.form-input::-webkit-resizer { display: none; }
     transform-origin: 24px 38px;
   }
 
+  /* Same duration, no per-cell delay, so every plant swings through the
+     same rotation at the same moment instead of rippling across the board. */
   #grid.puzzle-solved .plant-foliage {
     animation: plant-sway 1.6s ease-in-out infinite;
-  }
-
-  /* A few different delays/durations so the board doesn't sway in lockstep —
-     looks more like a breeze moving across a row of pots than one grid
-     animating as a single rigid unit. */
-  #grid.puzzle-solved .q-cell:nth-child(3n) .plant-foliage { animation-delay: 0.15s; animation-duration: 1.8s; }
-  #grid.puzzle-solved .q-cell:nth-child(3n+1) .plant-foliage { animation-delay: 0.3s; }
-  #grid.puzzle-solved .q-cell:nth-child(4n) .plant-foliage { animation-duration: 1.4s; }
-
-  @keyframes plant-sway {
-    0%, 100% { transform: rotate(-9deg); }
-    50% { transform: rotate(9deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1731,7 +1736,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     border: 1.3px solid var(--smoky-black);
   }
 
-  .q-cell.q-queen.q-wrong .placement-tag {
+  .q-cell.q-planted.q-wrong .placement-tag {
     background: hsl(0, 70%, 48%);
   }
 
@@ -1905,4 +1910,12 @@ textarea.form-input::-webkit-resizer { display: none; }
       font-size: min(4vw, 14px);
     }
   }
+}
+
+/* Must stay top-level, not nested in the @media block above — nested there,
+   the animation reported correctly (name/duration/play-state) but never
+   actually touched transform; it only took effect once moved out here. */
+@keyframes plant-sway {
+  0%, 100% { transform: rotate(-9deg); }
+  50% { transform: rotate(9deg); }
 }
