@@ -1568,107 +1568,244 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
 /*-----------------------------------*\
-  #GAME
+  #GAME (Queens)
 \*-----------------------------------*/
 
 .game {
 
+  .game-subtitle {
+    color: var(--light-gray);
+    font-size: var(--fs-7);
+    font-weight: var(--fw-300);
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+
+  .game-status {
+    min-height: 1.5em;
+    margin-top: 12px;
+    color: var(--orange-yellow-crayola);
+    font-weight: var(--fw-600);
+    text-align: center;
+  }
+
+  /* The mat: a lighter, slightly larger panel behind the grid so its edge
+     reads clearly against the (also dark) article background around it,
+     instead of relying on a thin border line that dark-on-dark washes out. */
+  #grid-stage {
+    width: 100%;
+    max-width: min(92vmin, 480px);
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+    padding: 10px;
+    background: var(--jet);
+    border-radius: 18px;
+    box-shadow: var(--shadow-2);
+  }
+
+  #grid-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #region-borders {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible; /* otherwise the outer-edge strokes get clipped at the viewBox boundary */
+  }
+
+  #region-borders path {
+    fill: none;
+    stroke: var(--smoky-black);
+    stroke-width: 4;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
   .grid-container {
     display: grid;
     width: 100%;
-    max-width: 90vmin;
-    aspect-ratio: 1 / 1;
-    gap: 0;
+    height: 100%;
+    gap: 2px;
+    background: var(--jet);
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  .cell {
-    border: 0.5px dashed #333;
+  #generating-overlay[hidden] {
+    display: none;
+  }
+
+  #generating-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--eerie-black-1);
+  }
+
+  #generating-overlay span {
+    font-size: var(--fs-6);
+    font-weight: var(--fw-500);
+    color: var(--light-gray);
+  }
+
+  .watering-illustration {
+    width: min(42vw, 140px);
+    height: auto;
+    display: block;
+  }
+
+  .q-cell {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    font-size: min(4vw, 27px);
+    font-size: min(6vw, 28px);
+    font-weight: var(--fw-600);
+    color: var(--smoky-black);
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    touch-action: none;
   }
-  .cell.active {
-    background: white;
-    color: #666;
+
+  .q-cell.q-marked {
+    color: #1a1f14;
+    font-size: min(5vw, 22px);
   }
-  .cell.deleted {
-    background-color: #cccccccc;
-    color: #666;
+
+  .plant-icon {
+    width: 78%;
+    height: 78%;
+    display: block;
   }
-  .cell.transparent {
-    background-color: #252525;
-    color: transparent;
+
+  /* Only the foliage sways, not the pot — a real plant stays rooted. Pivot
+     is hardcoded in the icon's own viewBox units (24,38 is where every
+     species' foliage meets the pot rim) rather than transform-box: fill-box,
+     which has inconsistent cross-browser support for nested SVG groups. */
+  .plant-foliage {
+    transform-origin: 24px 38px;
   }
-  .clue {
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    font-size: min(5vw, 22px); /* Larger font for target sums */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: min(12vw, 60px); /* Ensure enough height for target and current sums */
+
+  #grid.puzzle-solved .plant-foliage {
+    animation: plant-sway 1.6s ease-in-out infinite;
   }
-  .clue.correct {
-    background-color: #5b8f5dc0;
+
+  /* A few different delays/durations so the board doesn't sway in lockstep —
+     looks more like a breeze moving across a row of pots than one grid
+     animating as a single rigid unit. */
+  #grid.puzzle-solved .q-cell:nth-child(3n) .plant-foliage { animation-delay: 0.15s; animation-duration: 1.8s; }
+  #grid.puzzle-solved .q-cell:nth-child(3n+1) .plant-foliage { animation-delay: 0.3s; }
+  #grid.puzzle-solved .q-cell:nth-child(4n) .plant-foliage { animation-duration: 1.4s; }
+
+  @keyframes plant-sway {
+    0%, 100% { transform: rotate(-9deg); }
+    50% { transform: rotate(9deg); }
   }
-  .clue.incorrect {
-    background-color: #cc5963b7;
+
+  @media (prefers-reduced-motion: reduce) {
+    #grid.puzzle-solved .plant-foliage {
+      animation: none;
+    }
   }
-  .sum {
+
+  .placement-tag {
     position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: min(3vw, 14px);
+    top: 6%;
+    right: 6%;
+    width: min(3vw, 12px);
+    height: min(3vw, 12px);
+    border-radius: 50%;
+    background: hsl(130, 60%, 32%);
+    border: 1.3px solid var(--smoky-black);
   }
-  .pocket-sum-4 {
-    position: absolute;
-    top: 3px;
-    left: 4px;
-    font-size: min(3.2vw, 14px);
+
+  .q-cell.q-queen.q-wrong .placement-tag {
+    background: hsl(0, 70%, 48%);
   }
-  .pocket-sum-5 {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: min(3vw, 13px);
-  }
-  .pocket-sum-6 {
-    position: absolute;
-    top: 2px;
-    left: 1px;
-    font-size: min(2.8vw, 12px);
-  }
-  .pocket-sum-7 {
-    position: absolute;
-    top: 1px;
-    left: 0.5px;
-    font-size: min(2.6vw, 11px);
-  }
-  .sum.correct, .pocket-sum-4.correct, .pocket-sum-5.correct, .pocket-sum-6.correct, .pocket-sum-7.correct {
-    color: rgba(69, 255, 69, 0.884);
-  }
-  .sum.incorrect, .pocket-sum-4.incorrect, .pocket-sum-5.incorrect, .pocket-sum-6.incorrect, .pocket-sum-7.incorrect {
-    color: rgba(209, 28, 28, 0.897);
-  }
+
   #new-game {
     font-size: min(4vw, 16px);
     cursor: pointer;
     color: #FFDB6E;
     border: none;
     border-radius: 5px;
+    min-height: 44px;
   }
+
   #new-game:hover {
     color: #FFBC5E;
   }
+
+  .toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 12px 0;
+    cursor: pointer;
+    width: max-content;
+    margin-inline: auto;
+  }
+
+  .toggle-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .toggle-track {
+    position: relative;
+    width: 42px;
+    height: 24px;
+    background: var(--jet);
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+    flex: none;
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .toggle-switch input:checked + .toggle-track {
+    background: var(--orange-yellow-crayola);
+  }
+
+  .toggle-switch input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(18px);
+    background: var(--smoky-black);
+  }
+
+  .toggle-switch input:focus-visible + .toggle-track {
+    outline: 2px solid var(--orange-yellow-crayola);
+    outline-offset: 2px;
+  }
+
+  .toggle-label {
+    font-size: var(--fs-6);
+    color: var(--light-gray);
+  }
+
   .controls {
     display: flex;
     flex-direction: column;
@@ -1677,6 +1814,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     gap: 10px;
     margin: 10px;
   }
+
   .radio-group {
     display: flex;
     align-items: center;
@@ -1689,29 +1827,37 @@ textarea.form-input::-webkit-resizer { display: none; }
     max-width: 90vw;
     cursor: grab;
   }
+
   .radio-group:active {
     cursor: grabbing;
   }
+
   .radio-group input[type="radio"] {
     display: none;
   }
+
   .radio-group label {
-    padding: 10px;
+    padding: 10px 14px;
     font-size: min(4vw, 16px);
     background-color: #d3d3d3;
     color: #333;
     border-radius: 5px;
-    min-width: 50px;
-    min-height: 20px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     cursor: pointer;
     scroll-snap-align: center;
     transition: background-color 0.2s;
   }
+
   .radio-group input[type="radio"]:checked + label {
     background-color: rgb(64, 64, 65);
     color: #FFDB6E;
   }
+
   .radio-group label:hover {
     background-color: #585858;
     color: #FFBC5E;
@@ -1744,18 +1890,13 @@ textarea.form-input::-webkit-resizer { display: none; }
   #timer, #score {
     text-align: center;
   }
+
   @media (max-width: 600px) {
-    .cell {
-      font-size: min(5vw, 16px);
+    .q-cell {
+      font-size: min(7vw, 24px);
     }
-    .clue {
-      font-size: min(6vw, 20px);
-      min-height: min(14vw, 50px);
-    }
-    .sum, .pocket-sum {
-      top: 3px;
-      left: 4px;
-      font-size: min(4vw, 18px);
+    .q-cell.q-marked {
+      font-size: min(6vw, 18px);
     }
     .radio-group label {
       font-size: min(4vw, 14px);
